@@ -3,6 +3,7 @@ import React from 'react';
 const QualityAssurancePanel: React.FC = () => {
   return (
     <div className="panel-container">
+      <h2>Coming Soon!</h2>
       <h2>Quality Assurance & Consistency</h2>
       <p>
         Ensure that all creative outputs meet technical and artistic quality standards. 

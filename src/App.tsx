@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import './App.css'
 
+// Import TabList component
+import TabList from './components/TabList';
+
 // Import panel components
 import {
   VersionControlPanel,
@@ -24,17 +27,17 @@ function App() {
   // Define tabs with icons, labels and components
   const tabs: Tab[] = [
     { 
-      id: 'version-control', 
-      label: 'Version Control & Workflow History', 
-      icon: '🔄',
-      component: <VersionControlPanel />
-    },
-    { 
       id: 'asset-management', 
       label: 'Asset Management & Metadata', 
       icon: '🗂️',
       component: <AssetManagementPanel />
     },
+    { 
+      id: 'version-control', 
+      label: 'Version Control & Workflow History', 
+      icon: '🔄',
+      component: <VersionControlPanel />
+    },  
     { 
       id: 'review-collaboration', 
       label: 'Review & Collaboration', 
@@ -73,18 +76,11 @@ function App() {
   return (
     <div className="app-container">
       <div className="tab-panel">
-        <div className="tab-list">
-          {tabs.map(tab => (
-            <div 
-              key={tab.id}
-              className={`tab-item ${activeTab === tab.id ? 'active' : ''}`}
-              onClick={() => setActiveTab(tab.id)}
-            >
-              <span className="tab-icon">{tab.icon}</span>
-              <span className="tab-label">{tab.label}</span>
-            </div>
-          ))}
-        </div>
+        <TabList 
+          tabs={tabs}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
         
         <div className="content-area">
           {tabs.find(tab => tab.id === activeTab)?.component}
