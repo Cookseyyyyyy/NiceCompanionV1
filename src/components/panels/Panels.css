@@ -20,4 +20,37 @@
   margin-bottom: 20px;
 }
 
+.version-history {
+  display: flex;
+  overflow-x: auto;
+  padding: 15px;
+  gap: 15px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb, #555) var(--scrollbar-track, #2a2a2a);
+  overscroll-behavior-x: contain;
+}
+
+/* Enable horizontal scrolling with wheel */
+.version-history {
+  scroll-behavior: smooth;
+}
+
+/* For Webkit browsers (Chrome, Safari) */
+.version-history::-webkit-scrollbar {
+  height: 8px;
+}
+
+.version-history::-webkit-scrollbar-track {
+  background: var(--scrollbar-track, #2a2a2a);
+  border-radius: 4px;
+}
+
+.version-history::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb, #555);
+  border-radius: 4px;
+}
+
+/* Add JavaScript event handling for wheel scrolling */
+/* Note: This requires a JavaScript component to fully implement */
+
 /* Other panel styles can remain here */ 

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FaChevronDown, FaChevronRight, FaSearch, FaSync } from 'react-icons/fa';
+import React, { useState, useRef, useEffect } from 'react';
+import { FaChevronDown, FaChevronRight, FaSearch, FaSync, FaCircle, FaCodeBranch } from 'react-icons/fa';
 import './AssetManagementPanel.css';
 
 type AssetCategory = {
@@ -115,6 +115,94 @@ const AssetManagementPanel: React.FC = () => {
     );
   };
 
+  // Sample version control nodes
+  const versionNodes = [
+    { id: 1, type: 'main', message: 'Initial commit', date: '2023-10-01' },
+    { id: 2, type: 'main', message: 'Add basic structure', date: '2023-10-02' },
+    { id: 3, type: 'branch', message: 'Start feature A', date: '2023-10-03' },
+    { id: 4, type: 'main', message: 'Fix critical bug', date: '2023-10-03' },
+    { id: 5, type: 'branch', message: 'Continue feature A', date: '2023-10-04' },
+    { id: 6, type: 'main', message: 'Update dependencies', date: '2023-10-05' },
+    { id: 7, type: 'merge', message: 'Merge feature A', date: '2023-10-06' },
+    { id: 8, type: 'main', message: 'Prepare for release', date: '2023-10-07' },
+    { id: 9, type: 'branch', message: 'Start feature B', date: '2023-10-08' },
+    { id: 10, type: 'main', message: 'Release v1.0', date: '2023-10-10' },
+    { id: 11, type: 'hotfix', message: 'Hotfix login issue', date: '2023-10-15' },
+    { id: 12, type: 'branch', message: 'Continue feature B', date: '2023-10-18' },
+  ];
+
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Calculate node positions based on dates
+  const getNodeStyle = (date: string, index: number) => {
+    // Base case: first node is at 0
+    if (index === 0) return { left: '20px' };
+    
+    // If this is the last node, ensure it's far enough right for scrolling
+    // if (index === versionNodes.length - 1) {
+    //   return { 
+    //     position: 'absolute' as 'absolute',
+    //     left: '1900px' // Position last node near the end of the timeline
+    //   };
+    // }
+    
+    // Parse dates
+    const startDate = new Date(versionNodes[0].date);
+    const currentDate = new Date(date);
+    
+    // Calculate days difference
+    const diffDays = Math.round((currentDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+    
+    // Scale factor to convert days to pixels
+    const pixelsPerDay = 50; // Increased for more spacing
+    
+    // Calculate left offset
+    const leftOffset = diffDays * pixelsPerDay + 20;
+    
+    return { 
+      position: 'absolute' as 'absolute',
+      left: `${leftOffset}px` 
+    };
+  };
+
+  // Add horizontal scroll wheel handler with smooth scrolling
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    
+    const handleWheel = (e: WheelEvent) => {
+      if (scrollContainer) {
+        e.preventDefault();
+        
+        // Smoother scrolling with animation
+        const scrollAmount = e.deltaY;
+        const targetScrollLeft = scrollContainer.scrollLeft + scrollAmount;
+        
+        scrollContainer.scrollTo({
+          left: targetScrollLeft,
+          behavior: 'smooth'
+        });
+      }
+    };
+    
+    if (scrollContainer) {
+      scrollContainer.addEventListener('wheel', handleWheel);
+    }
+    
+    // Cleanup
+    return () => {
+      if (scrollContainer) {
+        scrollContainer.removeEventListener('wheel', handleWheel);
+      }
+    };
+  }, []);
+
+  // Existing useEffect for initial scroll
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
+    }
+  }, []);
+
   return (
     <div className="panel-container asset-management-panel">
       {/* <h2>Asset Management</h2> */}
@@ -170,6 +258,32 @@ const AssetManagementPanel: React.FC = () => {
                     ))}
                   </ul>
                 )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      {/* Version Control Visualization */}
+      <div className="version-control-section">
+        <div className="version-control-header">
+          <span>Version History</span>
+        </div>
+        
+        <div className="version-visualization-container" ref={scrollContainerRef}>
+          <div className="version-timeline">
+            {versionNodes.map((node, index) => (
+              <div 
+                key={node.id} 
+                className={`version-node ${node.type}`}
+                title={`${node.message} (${node.date})`}
+                style={getNodeStyle(node.date, index)}
+              >
+                <div className="node-connector"></div>
+                <div className="node-circle">
+                  {node.type === 'merge' ? <FaCodeBranch /> : <FaCircle />}
+                </div>
+                <div className="node-label">{node.id}</div>
               </div>
             ))}
           </div>

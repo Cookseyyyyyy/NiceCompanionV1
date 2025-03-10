@@ -12,7 +12,8 @@ import {
   AIAssistancePanel,
   ProjectPipelinePanel,
   QualityAssurancePanel,
-  AnalyticsPanel
+  AnalyticsPanel,
+  DavinciTestPanel
 } from './components/panels';
 
 // Define the Tab interface
@@ -28,16 +29,16 @@ function App() {
   const tabs: Tab[] = [
     { 
       id: 'asset-management', 
-      label: 'Asset Management & Metadata', 
+      label: 'Asset Management & History', 
       icon: '🗂️',
       component: <AssetManagementPanel />
     },
-    { 
-      id: 'version-control', 
-      label: 'Version Control & Workflow History', 
-      icon: '🔄',
-      component: <VersionControlPanel />
-    },  
+    // { 
+    //   id: 'version-control', 
+    //   label: 'Version Control & Workflow History', 
+    //   icon: '🔄',
+    //   component: <VersionControlPanel />
+    // },  
     { 
       id: 'review-collaboration', 
       label: 'Review & Collaboration', 
@@ -50,23 +51,29 @@ function App() {
       icon: '🤖',
       component: <AIAssistancePanel />
     },
-    { 
-      id: 'project-pipeline', 
-      label: 'Project Pipeline & Task Management', 
-      icon: '📋',
-      component: <ProjectPipelinePanel />
-    },
+    // { 
+    //   id: 'project-pipeline', 
+    //   label: 'Project Pipeline & Task Management', 
+    //   icon: '📋',
+    //   component: <ProjectPipelinePanel />
+    // },
     { 
       id: 'quality-assurance', 
       label: 'Quality Assurance & Consistency', 
       icon: '✅',
       component: <QualityAssurancePanel />
     },
+    // { 
+    //   id: 'analytics', 
+    //   label: 'Analytics & Insights', 
+    //   icon: '📊',
+    //   component: <AnalyticsPanel />
+    // }
     { 
-      id: 'analytics', 
-      label: 'Analytics & Insights', 
-      icon: '📊',
-      component: <AnalyticsPanel />
+      id: 'davinci-test', 
+      label: 'Davinci Test', 
+      icon: '📼',
+      component: <DavinciTestPanel />
     }
   ];
 

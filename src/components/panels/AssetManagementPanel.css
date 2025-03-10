@@ -50,6 +50,25 @@
   margin-bottom: 8px;
 }
 
+/* Consistent scrollbar styling */
+.asset-browser::-webkit-scrollbar,
+.version-visualization-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  display: block;
+}
+
+.asset-browser::-webkit-scrollbar-thumb,
+.version-visualization-container::-webkit-scrollbar-thumb {
+  background-color: var(--border-color, #444);
+  border-radius: 3px;
+}
+
+.asset-browser::-webkit-scrollbar-track,
+.version-visualization-container::-webkit-scrollbar-track {
+  background-color: var(--panel-bg, #1e1e1e);
+}
+
 .category {
   margin-bottom: 0;
 }
@@ -94,9 +113,10 @@
 }
 
 .sync-button-container {
-  padding: 0 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
   display: flex;
   justify-content: flex-end;
+  margin-top: 5px;
 }
 
 .sync-button {
@@ -154,4 +174,124 @@
 .section .category-header {
   padding-left: 15px;
   font-size: 12px;
+}
+
+/* Updated Version Control Visualization */
+.version-control-section {
+  margin-bottom: 10px;
+}
+
+.version-control-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  background-color: var(--section-header-bg, #1a1a1a);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--accent-color, #3498db);
+  border-bottom: 1px solid var(--accent-color, #3498db);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.version-visualization-container {
+  position: relative;
+  height: 80px;
+  background-color: var(--panel-bg, #1e1e1e);
+  border: 1px solid var(--border-color, #444);
+  border-top: none;
+  border-radius: 0 0 3px 3px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.version-timeline {
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  width: 100%;
+  padding: 0 20px;
+  position: relative;
+  height: 100%;
+}
+
+.version-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  /* Base positioning handled by JS now */
+}
+
+.node-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  cursor: pointer;
+  font-size: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.node-circle:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s;
+}
+
+.node-label {
+  font-size: 10px;
+  margin-top: 3px;
+  color: var(--text-color, #e0e0e0);
+}
+
+/* Node types with different colors */
+.version-node.main .node-circle {
+  background-color: var(--accent-color, #3498db);
+  color: white;
+}
+
+.version-node.branch .node-circle {
+  background-color: #27ae60;
+  color: white;
+}
+
+.version-node.merge .node-circle {
+  background-color: #9b59b6;
+  color: white;
+}
+
+.version-node.hotfix .node-circle {
+  background-color: #e74c3c;
+  color: white;
+}
+
+/* Connectors for branch visualization */
+.version-node.branch .node-connector {
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background-color: #27ae60;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.version-node.merge .node-connector {
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background-color: #9b59b6;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Scroll buttons */
+.scroll-button {
+  display: none;
 } 
