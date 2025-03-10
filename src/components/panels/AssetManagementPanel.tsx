@@ -95,6 +95,8 @@ const AssetManagementPanel: React.FC = () => {
     'TeodoraGFX.aep',
   ];
 
+  const [activeTooltip, setActiveTooltip] = useState<{id: number, x: number, y: number} | null>(null);
+
   // Toggle expand/collapse for an asset category
   const toggleAssetCategory = (categoryIndex: number) => {
     setAssetCategories(prevCategories => {
@@ -117,18 +119,18 @@ const AssetManagementPanel: React.FC = () => {
 
   // Sample version control nodes
   const versionNodes = [
-    { id: 1, type: 'main', message: 'Initial commit', date: '2023-10-01' },
-    { id: 2, type: 'main', message: 'Add basic structure', date: '2023-10-02' },
-    { id: 3, type: 'branch', message: 'Start feature A', date: '2023-10-03' },
-    { id: 4, type: 'main', message: 'Fix critical bug', date: '2023-10-03' },
-    { id: 5, type: 'branch', message: 'Continue feature A', date: '2023-10-04' },
-    { id: 6, type: 'main', message: 'Update dependencies', date: '2023-10-05' },
-    { id: 7, type: 'merge', message: 'Merge feature A', date: '2023-10-06' },
-    { id: 8, type: 'main', message: 'Prepare for release', date: '2023-10-07' },
-    { id: 9, type: 'branch', message: 'Start feature B', date: '2023-10-08' },
-    { id: 10, type: 'main', message: 'Release v1.0', date: '2023-10-10' },
-    { id: 11, type: 'hotfix', message: 'Hotfix login issue', date: '2023-10-15' },
-    { id: 12, type: 'branch', message: 'Continue feature B', date: '2023-10-18' },
+    { id: 1, type: 'main', message: 'Initial project setup', date: '2023-10-01' },
+    { id: 2, type: 'main', message: 'Import raw footage', date: '2023-10-02' },
+    { id: 3, type: 'branch', message: 'Start VFX compositing', date: '2023-10-03' },
+    { id: 4, type: 'main', message: 'Fix audio sync issues', date: '2023-10-03' },
+    { id: 5, type: 'branch', message: 'Add particle effects to scene 3', date: '2023-10-04' },
+    { id: 6, type: 'main', message: 'Color grading pass 1', date: '2023-10-05' },
+    { id: 7, type: 'merge', message: 'Merge VFX elements into main timeline', date: '2023-10-06' },
+    { id: 8, type: 'main', message: 'Finalize sound design', date: '2023-10-07' },
+    { id: 9, type: 'branch', message: 'Create motion graphics intro', date: '2023-10-08' },
+    { id: 10, type: 'main', message: 'Export client review v1.0', date: '2023-10-10' },
+    { id: 11, type: 'hotfix', message: 'Fix rendering artifacts in scene 5', date: '2023-10-15' },
+    { id: 12, type: 'branch', message: 'Add 3D camera tracking to shot 12', date: '2023-10-18' },
   ];
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -203,6 +205,20 @@ const AssetManagementPanel: React.FC = () => {
     }
   }, []);
 
+  // Handle mouse events for tooltips
+  const handleNodeMouseEnter = (e: React.MouseEvent, node: {id: number, message: string, date: string}) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setActiveTooltip({
+      id: node.id,
+      x: rect.left + rect.width / 2,
+      y: rect.top - 10
+    });
+  };
+  
+  const handleNodeMouseLeave = () => {
+    setActiveTooltip(null);
+  };
+
   return (
     <div className="panel-container asset-management-panel">
       {/* <h2>Asset Management</h2> */}
@@ -276,8 +292,9 @@ const AssetManagementPanel: React.FC = () => {
               <div 
                 key={node.id} 
                 className={`version-node ${node.type}`}
-                title={`${node.message} (${node.date})`}
                 style={getNodeStyle(node.date, index)}
+                onMouseEnter={(e) => handleNodeMouseEnter(e, node)}
+                onMouseLeave={handleNodeMouseLeave}
               >
                 <div className="node-connector"></div>
                 <div className="node-circle">
@@ -287,6 +304,23 @@ const AssetManagementPanel: React.FC = () => {
               </div>
             ))}
           </div>
+          
+          {activeTooltip && (
+            <div 
+              className="version-tooltip"
+              style={{
+                left: `${activeTooltip.x}px`,
+                top: `${activeTooltip.y}px`,
+                position: 'fixed',
+                transform: 'translate(-50%, -100%)'
+              }}
+            >
+              {versionNodes.find(node => node.id === activeTooltip.id)?.message}
+              <div className="tooltip-date">
+                {versionNodes.find(node => node.id === activeTooltip.id)?.date}
+              </div>
+            </div>
+          )}
         </div>
       </div>
       

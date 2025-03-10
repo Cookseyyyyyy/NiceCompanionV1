@@ -294,4 +294,40 @@
 /* Scroll buttons */
 .scroll-button {
   display: none;
+}
+
+/* Custom tooltip for version nodes */
+.version-tooltip {
+  background-color: rgba(40, 40, 40, 0.95);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  max-width: 200px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  pointer-events: none;
+  white-space: normal;
+  text-align: center;
+  border: 1px solid var(--accent-color, #3498db);
+}
+
+.version-tooltip:after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid rgba(40, 40, 40, 0.95);
+}
+
+.tooltip-date {
+  font-size: 10px;
+  margin-top: 4px;
+  color: #aaa;
+  font-style: italic;
 } 
