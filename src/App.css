@@ -130,3 +130,35 @@ body {
   font-size: 1.2rem;
   background: #1e1e1e;
 }
+
+.backend-status {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  background-color: #3d3d3d;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.status-indicator {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.backend-status.loading .status-indicator {
+  background-color: #f0ad4e;
+}
+
+.backend-status.connected .status-indicator {
+  background-color: #5cb85c;
+}
+
+.backend-status.disconnected .status-indicator {
+  background-color: #d9534f;
+}

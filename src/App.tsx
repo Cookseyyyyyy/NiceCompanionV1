@@ -3,6 +3,7 @@ import './App.css'
 
 // Import TabList component
 import TabList from './components/TabList';
+import BackendStatusIndicator from './components/BackendStatusIndicator';
 
 // Import panel components
 import {
@@ -93,6 +94,7 @@ function App() {
           {tabs.find(tab => tab.id === activeTab)?.component}
         </div>
       </div>
+      <BackendStatusIndicator />
     </div>
   )
 }
