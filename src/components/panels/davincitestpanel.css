@@ -1,0 +1,270 @@
+.panel-container {
+  padding: 20px;
+  background-color: #282c34;
+  color: white;
+  height: 100%;
+  overflow: auto;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #555;
+  padding-bottom: 10px;
+}
+
+.panel-title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.refresh-button {
+  background-color: #4a5568;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.refresh-button:hover {
+  background-color: #2d3748;
+}
+
+.resolve-status {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #1a1d24;
+}
+
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.connected {
+  background-color: #48bb78;
+}
+
+.disconnected {
+  background-color: #f56565;
+}
+
+.info-card {
+  background-color: #1a1d24;
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.info-title {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #90cdf4;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.info-item {
+  margin-bottom: 8px;
+}
+
+.label {
+  color: #a0aec0;
+  font-size: 0.9rem;
+}
+
+.value {
+  font-weight: 500;
+}
+
+.error-message {
+  color: #f56565;
+  padding: 10px;
+  background-color: rgba(245, 101, 101, 0.1);
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.tab-navigation {
+  display: flex;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #333;
+}
+
+.tab-button {
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  color: #ddd;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.tab-button.active {
+  border-bottom: 2px solid #ff8c00;
+  color: #ff8c00;
+}
+
+.track-list {
+  width: 100%;
+}
+
+.track-table, .marker-table, .clip-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.track-table th, .marker-table th, .clip-table th {
+  text-align: left;
+  padding: 8px;
+  background-color: #2a2a2a;
+  color: #eee;
+  font-weight: normal;
+}
+
+.track-table td, .marker-table td, .clip-table td {
+  padding: 8px;
+  border-bottom: 1px solid #333;
+}
+
+.track-table tr:hover, .marker-table tr:hover, .clip-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.marker-color, .clip-color {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.diagnostic-button {
+  background-color: #4a5568;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+}
+
+.diagnostic-button:hover {
+  background-color: #2d3748;
+}
+
+.diagnostic-section {
+  margin-top: 10px;
+}
+
+.diagnostic-section h4 {
+  margin: 10px 0 5px 0;
+  color: #90cdf4;
+  font-size: 1rem;
+}
+
+.python-path {
+  max-height: 30px;
+  overflow: hidden;
+  cursor: help;
+  background-color: #2d3748;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.render-jobs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.render-job-item {
+  background-color: #232830;
+  border-radius: 4px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.render-job-name {
+  font-weight: 500;
+}
+
+.render-job-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status-rendering {
+  background-color: #3182ce;
+  color: white;
+}
+
+.status-complete {
+  background-color: #48bb78;
+  color: white;
+}
+
+.status-failed {
+  background-color: #e53e3e;
+  color: white;
+}
+
+.status-queued {
+  background-color: #718096;
+  color: white;
+}
+
+.progress-bar {
+  width: 100px;
+  height: 8px;
+  background-color: #2d3748;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #48bb78;
+  border-radius: 4px;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.7rem;
+  color: white;
+}
